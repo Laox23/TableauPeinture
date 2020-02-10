@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Helper\**" />
     <Compile Remove="icones\**" />
+    <Content Remove="Helper\**" />
     <Content Remove="icones\**" />
+    <EmbeddedResource Remove="Helper\**" />
     <EmbeddedResource Remove="icones\**" />
+    <None Remove="Helper\**" />
     <None Remove="icones\**" />
   </ItemGroup>
 

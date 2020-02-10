@@ -15,8 +15,8 @@
 
             <div class="container">
                 <div class="row justify-content-around mb-5">
-                    <img src="~/@Model.NamesService.DossierImagesTableaux/@Model.Image.Url" class="center-block rounded" alt="">
-                    <input type="hidden" asp-for="ImageId" value="@Model.Image.Id" />
+                    <img src="~/@Model.Image.UrlAffichage" class="center-block rounded" alt="">
+                    <input type="hidden" asp-for="ImageId" value="@Model.Image.ImageId" />
                 </div>
 
                 <div class="row justify-content-around">

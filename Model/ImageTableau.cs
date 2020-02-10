@@ -7,7 +7,7 @@ namespace Model
     public class ImageTableau : BaseModel
     {
         [Required]
-        public string Url { get; set; }
+        public string NomBase { get; set; }
 
         [Required]
         public string Nom { get; set; }

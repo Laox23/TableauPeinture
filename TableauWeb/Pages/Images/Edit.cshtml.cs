@@ -1,32 +1,28 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Model;
-using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Dto;
 using TableauWeb.Services;
 
 namespace TableauWeb.Images
 {
     public class EditModel : PageModel
     {
+        private readonly IFichierService _fichierService;
         private readonly TableauxContext _context;
 
-        public NamesService NamesService { get; set; }
-
         public EditModel(TableauxContext context,
-            NamesService namesService)
+            IFichierService fichierService)
         {
             _context = context;
-            NamesService = namesService;
+            _fichierService = fichierService;
         }
 
         [BindProperty]
-        public ImageTableau ImageTableau { get; set; }
+        public ImagesInformation Image { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,12 +31,22 @@ namespace TableauWeb.Images
                 return NotFound();
             }
 
-            ImageTableau = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+            var image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (ImageTableau == null)
+            Image = new ImagesInformation()
+            {
+                ImageId = image.Id,
+                MaxImpression = image.MaxImpression,
+                Nom = image.Nom,
+                NomBase = image.NomBase,
+                UrlAffichage = _fichierService.GetUrlImage(image.Id)
+            };
+
+            if (Image == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
@@ -48,20 +54,27 @@ namespace TableauWeb.Images
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            var imageAUpdate = await _context.Images.FirstAsync(i => i.Id == ImageTableau.Id);
+            var imageAUpdate = await _context.Images.FirstOrDefaultAsync(i => i.Id == Image.ImageId);
+            if (imageAUpdate == null)
+            {
+                return NotFound();
+            }
 
-            ImageTableau.Url = imageAUpdate.Url;
-            ImageTableau.MaxImpression = imageAUpdate.MaxImpression;
+            //imageAUpdate.Nom = Image.Nom;
+            //imageAUpdate.MaxImpression = Image.MaxImpression;
+
+            imageAUpdate.Nom = Image.Nom;
+            imageAUpdate.MaxImpression = Image.MaxImpression;
 
             try
             {
-                _context.Entry(imageAUpdate).CurrentValues.SetValues(ImageTableau);
+                _context.Entry(imageAUpdate).CurrentValues.SetValues(Image);
 
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ImageTableauExists(ImageTableau.Id))
+                if (!ImageTableauExists(imageAUpdate.Id))
                 {
                     return NotFound();
                 }

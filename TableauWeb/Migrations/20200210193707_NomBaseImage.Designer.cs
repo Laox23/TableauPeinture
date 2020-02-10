@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TableauWeb.Data;
@@ -9,9 +10,10 @@ using TableauWeb.Data;
 namespace TableauWeb.Migrations
 {
     [DbContext(typeof(TableauxContext))]
-    partial class MvcMovieContextModelSnapshot : ModelSnapshot
+    [Migration("20200210193707_NomBaseImage")]
+    partial class NomBaseImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

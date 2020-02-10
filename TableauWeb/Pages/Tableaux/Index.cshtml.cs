@@ -18,6 +18,7 @@ namespace TableauWeb.Tableaux
     {
         private readonly TableauxContext _context;
         private readonly IWebHostEnvironment _environment;
+        private readonly IFichierService _fichierService;
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
@@ -26,11 +27,13 @@ namespace TableauWeb.Tableaux
 
         public IndexModel(TableauxContext context,
             IWebHostEnvironment environment,
-            NamesService namesService)
+            NamesService namesService,
+            IFichierService fichierService)
         {
             _context = context;
             NamesService = namesService;
             _environment = environment;
+            _fichierService = fichierService;
         }
 
         public Collection<TableauInformation> TableauxInfo { get; set; }
@@ -60,12 +63,13 @@ namespace TableauWeb.Tableaux
                 TableauxInfo.Add(new TableauInformation()
                 {
                     ImageId = image.Id,
-                    Url = image.Url,
+                    UrlAffichage = _fichierService.GetUrlImage(image.Id),
                     Nom = image.Nom,
                     NombreImpression = string.Format("({0} / {1})", nombreImpressionDejaFaite, image.MaxImpression)
                 });
             }
-            Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux);
+
+            //Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux);
 
             //var files = Directory.GetFiles(Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux));
 

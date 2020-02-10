@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Model;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Dto;
 using TableauWeb.Services;
 
 namespace TableauWeb.Images
@@ -11,20 +11,37 @@ namespace TableauWeb.Images
     public class IndexModel : PageModel
     {
         private readonly TableauxContext _context;
+        private readonly IFichierService _fichierService;
 
         public NamesService NamesService { get; set; }
 
-        public IndexModel(TableauxContext context, NamesService namesService)
+        public IndexModel(TableauxContext context, 
+            NamesService namesService,
+            IFichierService fichierService)
         {
             _context = context;
+            _fichierService = fichierService;
             NamesService = namesService;
         }
 
-        public IList<ImageTableau> ImageTableau { get;set; }
+        public Collection<ImagesInformation> Images { get;set; }
 
         public async Task OnGetAsync()
         {
-            ImageTableau = await _context.Images.ToListAsync();
+            var images = await _context.Images.ToListAsync();
+
+            Images = new Collection<ImagesInformation>();
+            foreach (var image in images)
+            {
+                Images.Add(new ImagesInformation()
+                {
+                    ImageId = image.Id,
+                    MaxImpression = image.MaxImpression,
+                    Nom = image.Nom,
+                    NomBase = image.NomBase,
+                    UrlAffichage = _fichierService.GetUrlImage(image.Id)
+                });
+            }
         }
     }
 }

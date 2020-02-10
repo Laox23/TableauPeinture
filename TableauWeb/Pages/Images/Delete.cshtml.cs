@@ -1,28 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Model;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Dto;
 using TableauWeb.Services;
 
 namespace TableauWeb.Images
 {
     public class DeleteModel : PageModel
     {
+        private readonly IFichierService _fichierService;
         private readonly TableauxContext _context;
 
-        public NamesService NamesService { get; set; }
+        private NamesService _namesService { get; set; }
 
-        public DeleteModel(TableauWeb.Data.TableauxContext context, 
-            NamesService namesService)
+        public DeleteModel(TableauxContext context,
+            NamesService namesService,
+            IFichierService fichierService)
         {
             _context = context;
-            NamesService = namesService;
+            _namesService = namesService;
+            _fichierService = fichierService;
         }
 
         [BindProperty]
-        public ImageTableau ImageTableau { get; set; }
+        public ImagesInformation Image { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,29 +34,35 @@ namespace TableauWeb.Images
                 return NotFound();
             }
 
-            ImageTableau = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+            var image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (ImageTableau == null)
+            Image = new ImagesInformation()
+            {
+                ImageId = image.Id,
+                MaxImpression = image.MaxImpression,
+                Nom = image.Nom,
+                NomBase = image.NomBase,
+                UrlAffichage = _fichierService.GetUrlImage(image.Id)
+            };
+
+            if (Image == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null)
+            var imageADelete = await _context.Images.FirstOrDefaultAsync(i => i.Id == id);
+            if (imageADelete == null)
             {
                 return NotFound();
             }
 
-            ImageTableau = await _context.Images.FindAsync(id);
-
-            if (ImageTableau != null)
-            {
-                _context.Images.Remove(ImageTableau);
-                await _context.SaveChangesAsync();
-            }
+            _context.Images.Remove(imageADelete);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

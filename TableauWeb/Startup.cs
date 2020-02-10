@@ -33,28 +33,22 @@ namespace TableauWeb
                 options.Conventions.AddPageRoute("/Tableaux/Index", "");
             });
 
+            //services.AddDbContext<TableauxContext>(options =>
+            //    options.UseNpgsql("Server=localhost;Port=5432;Database=Tableaux;User Id=Ni;Password=Ni;"));
+
             services.AddDbContext<TableauxContext>(options =>
-            options.UseNpgsql("Server=localhost;Port=5432;Database=Tableaux;User Id=Ni;Password=Ni;"));
-
-
-            //services.AddDbContext<TableauxContext>(options =>
-            //options.UseNpgsql("Host=localhost:5432;Database=Tableaux;Username=Ni;Password=Ni"));
-
-
-            //services.AddDbContext<TableauxContext>(options =>
-            //            options.UseSqlServer(Configuration.GetConnectionString("TableauxContext")));
+                        options.UseSqlServer(Configuration.GetConnectionString("TableauxContext")));
 
             services.AddSingleton<NamesService>();
 
+            services.AddScoped<IFichierService, FichierService>();
+          
             services.AddDirectoryBrowser();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-
-
             //if (env.IsDevelopment())
             //{
             //    app.UseDeveloperExceptionPage();
@@ -69,21 +63,8 @@ namespace TableauWeb
             app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
-
-            //app.UseStaticFiles(new StaticFileOptions()
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Donnees")),
-            //    RequestPath = new PathString("/Donnees")
-            //});
-
-            //app.UseDirectoryBrowser(new DirectoryBrowserOptions()
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //        Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Donnees")),
-            //    RequestPath = new PathString("/Donnees")
-            //});
 
             app.UseRouting();
 

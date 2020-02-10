@@ -7,9 +7,23 @@ namespace TableauWeb.Dto
 {
     public class TableauInformation
     {
-        public string Url { get; set; }
+        public string UrlAffichage { get; set; }
         public string Nom { get; set; }
         public string NombreImpression { get; set; }
         public int ImageId { get; set; }
+    }
+
+    public class ImagesInformation
+    {
+        public int ImageId { get; set; }
+
+        public string UrlAffichage { get; set; }
+
+        public string NomBase { get; set; }
+
+        public string Nom { get; set; }
+
+        public int MaxImpression { get; set; }
+
     }
 }

@@ -12,28 +12,17 @@ namespace TableauWeb.Services
 
         public NamesService(IConfiguration config, IWebHostEnvironment webHostEnvironment)
         {
-           // var dossierDonnees = config.GetValue<string>("Constantes:DossierDonnees");
             var dossierImagesTableaux = config.GetValue<string>("Constantes:DossierImagesTableaux");
             var dossierPdf = config.GetValue<string>("Constantes:DossierPdf");
 
             DossierImagesTableaux = dossierImagesTableaux;
             DossierPdf = dossierPdf;
 
-            //DossierImagesTableaux = Path.Combine(dossierDonnees, dossierImagesTableaux);
-            //DossierPdf = Path.Combine(dossierDonnees, dossierPdf);
-
-            if (!Directory.Exists(Path.Combine(webHostEnvironment.ContentRootPath, DossierImagesTableaux)))
+            if (!Directory.Exists(Path.Combine(webHostEnvironment.WebRootPath, DossierImagesTableaux)))
                 Directory.CreateDirectory(Path.Combine(webHostEnvironment.WebRootPath, DossierImagesTableaux));
 
-            if (!Directory.Exists(Path.Combine(webHostEnvironment.ContentRootPath, DossierPdf)))
+            if (!Directory.Exists(Path.Combine(webHostEnvironment.WebRootPath, DossierPdf)))
                 Directory.CreateDirectory(Path.Combine(webHostEnvironment.WebRootPath, DossierPdf));
-
-            if (!Directory.Exists(DossierImagesTableaux))
-                Directory.CreateDirectory(DossierImagesTableaux);
-
-            if (!Directory.Exists(DossierPdf))
-                Directory.CreateDirectory(DossierPdf);
-
         }
     }
 }

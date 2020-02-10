@@ -6,32 +6,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Dto;
 using TableauWeb.Services;
 
 namespace TableauWeb.Tableaux
 {
     public class CreateModel : PageModel
     {
+        private readonly IFichierService _fichierService;
         private readonly TableauxContext _context;
 
+        public NamesService NamesService { get; set; }
 
         [BindProperty]
         public Tableau Tableau { get; set; }
 
         [BindProperty]
-        public ImageTableau Image { get; set; }
+        public ImagesInformation Image { get; set; }
+
+
+        [BindProperty]
+        public int DimensionId { get; set; }
+
+        [BindProperty]
+        public int FinitionId { get; set; }
+
+        [BindProperty]
+        public int ImageId { get; set; }
+
 
         public IList<Dimension> Dimensions { get; set; }
         public IList<Finition> Finitions { get; set; }
         public IList<Tableau> Tableaux { get; set; }
 
-        public NamesService NamesService { get; set; }
 
         public CreateModel(TableauxContext context,
-            NamesService namesService)
+            NamesService namesService,
+            IFichierService fichierService)
         {
             _context = context;
-            NamesService = namesService;
+            _fichierService = fichierService;
         }
 
         public async Task<IActionResult> OnGet(int? id)
@@ -41,7 +55,16 @@ namespace TableauWeb.Tableaux
                 return NotFound();
             }
 
-            Image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+            var image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+
+            Image = new ImagesInformation()
+            {
+                ImageId = image.Id,
+                MaxImpression = image.MaxImpression,
+                Nom = image.Nom,
+                NomBase = image.NomBase,
+                UrlAffichage = _fichierService.GetUrlImage(image.Id)
+            };
 
             if (Image == null)
             {
@@ -54,14 +77,6 @@ namespace TableauWeb.Tableaux
             return Page();
         }
 
-        [BindProperty]
-        public int DimensionId { get; set; }
-
-        [BindProperty]
-        public int FinitionId { get; set; }
-
-        [BindProperty]
-        public int ImageId { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
