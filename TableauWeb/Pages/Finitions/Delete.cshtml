@@ -1,0 +1,36 @@
+﻿@page
+@model TableauWeb.Finitions.DeleteModel
+
+    <div class="container-fluid">
+        <a asp-page="Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+    </div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <h4>Supprimer définitvement la finition ?</h4>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Finition.Nom)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Finition.Nom)
+                </dd>
+            </dl>
+
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

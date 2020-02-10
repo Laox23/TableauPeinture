@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Fonollosa Nicolas">
+
+    <title>Murciano register number</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/main.css" />
+</head>
+
+<body>
+    <nav class="navbar justify-content-center">
+        <a asp-area="" asp-page="/Tableaux/Index" class="nav-item nav-link">
+            <i class="fa fa-home"></i> Home
+        </a>
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-cogs"></i> Paramétres
+            </a>
+            <div class="dropdown-menu">
+                <a class="nav-item nav-link" asp-area="" asp-page="/Images/Index">Images</a>
+                <a class="nav-item nav-link" asp-area="" asp-page="/Dimensions/Index">Dimensions</a>
+                <a class="nav-item nav-link" asp-area="" asp-page="/Finitions/Index">Finitions</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      @*  <main role="main" class="pb-3">*@
+            @RenderBody()
+        @*</main>*@
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; Murciano register number - <a asp-area="" asp-page="/Tableaux/Index"><i class="fa fa-home"></i> Home</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

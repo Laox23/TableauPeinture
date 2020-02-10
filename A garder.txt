@@ -1,0 +1,10 @@
+Azure
+Compte 	nicolas.fonollosa@gmail.com
+		A********01!
+		
+SqlAzure	
+		Adiministrateur
+		Murciano01!
+		DefautConnection
+		
+https://tableauweb20200209125511.azurewebsites.net

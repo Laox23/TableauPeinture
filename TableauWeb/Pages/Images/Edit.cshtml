@@ -1,0 +1,35 @@
+﻿@page
+@model TableauWeb.Images.EditModel
+
+    <div class="container-fluid">
+        <a asp-page="Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+    </div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <img src="~/@Model.NamesService.DossierImagesTableaux/@Model.ImageTableau.Url" class="img-fluid" asp-append-version="true" />
+
+            <div class="form-group">
+                <label asp-for="ImageTableau.Nom" class="control-label"></label>
+                <input asp-for="ImageTableau.Nom" class="form-control" />
+                <span asp-validation-for="ImageTableau.Nom" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="ImageTableau.Id" />
+
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

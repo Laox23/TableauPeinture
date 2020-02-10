@@ -1,0 +1,90 @@
+
+body {
+    background-color: black;
+}
+
+nav {
+    height: 10%;
+    font-size: x-large;
+}
+
+nav > a,
+.nav-item > a,
+div.dropdown-menu > a,
+footer > div > a,
+div.recherche ,
+div.container-fluid > a {
+color: rgba(255, 255, 255, .7);
+}
+
+    nav > a:hover,
+    .nav-item > a:hover,
+    div.dropdown-menu > a:hover,
+    footer > div > a:hover,
+    div.recherche > div > button:hover,
+    div.container-fluid > a:hover {
+        color: white;
+    }
+
+div.container-fluid > a
+div.recherche {
+    color: rgba(255, 255, 255, .7);
+    font-size: larger;
+}
+
+table.table {
+    font-size: larger;
+}
+
+div.float-right > button.btn
+button.btn > i {
+    font-size: larger;
+}
+
+    div.float-right > button.btn:hover {
+        color: darkgrey;
+    }
+
+div.dropdown-menu {
+    background-color: rgba(0, 0, 0, .7);
+    border-radius: 5px;
+    border: 0px none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+.navbar-nav .nav-item .dropdown-menu > a {
+    color: rgba(255, 255, 255, .7);
+    padding: 7px 20px;
+}
+
+/*footer.footer {
+    position: fixed;
+    height: 4%;
+    bottom: 0;
+    width: 100%;
+}*/
+
+label.btn {
+    margin: 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Open sans", Helvetica, Arial;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 30px;
+}
+
+img {
+    max-width: 100%;
+}
+
+    img.pull-right {
+        margin-left: 10px;
+    }
+
+    img.pull-left {
+        margin-right: 10px;
+    }

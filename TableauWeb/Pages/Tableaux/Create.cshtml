@@ -1,0 +1,54 @@
+﻿@page
+@model TableauWeb.Tableaux.CreateModel
+
+<div class="container-fluid">
+    <a asp-page="Index">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+    </a>
+</div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="container">
+                <div class="row justify-content-around mb-5">
+                    <img src="~/@Model.NamesService.DossierImagesTableaux/@Model.Image.Url" class="center-block rounded" alt="">
+                    <input type="hidden" asp-for="ImageId" value="@Model.Image.Id" />
+                </div>
+
+                <div class="row justify-content-around">
+                    <div class="btn-group-vertical col" data-toggle="buttons">
+                        @foreach (var dimension in Model.Dimensions)
+                        {
+                            <label class="btn btn-large btn-dark">
+                                <input type="radio" asp-for="@Model.DimensionId" value="@dimension.Id"> @Html.DisplayFor(modelItem => dimension.Nom) (@Html.DisplayFor(modelItem => dimension.Hauteur) x @Html.DisplayFor(modelItem => dimension.Largeur))
+                            </label>
+                        }
+                    </div>
+
+                    <div class="btn-group-vertical col" data-toggle="buttons">
+                        @foreach (var finition in Model.Finitions)
+                        {
+                            <label class="btn btn-large btn-dark">
+                                <input type="radio" asp-for="@Model.FinitionId" value="@finition.Id"> @Html.DisplayFor(modelItem => finition.Nom)
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="float-right">
+                        <button class="btn ml-auto"><i class="fa fa-check" aria-hidden="true"></i> Valider</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,42 @@
+﻿@page
+@model TableauWeb.Images.DeleteModel
+
+    <div class="container-fluid">
+        <a asp-page="Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+    </div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <h4>Supprimer définitvement l'image ?</h4>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                </dt>
+                <dd class="col-sm-10">
+                    <img src="~/@Model.NamesService.DossierImagesTableaux/@Model.ImageTableau.Url" class="img-fluid" asp-append-version="true" />
+                </dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ImageTableau.Nom)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ImageTableau.Nom)
+                </dd>
+            </dl>
+
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

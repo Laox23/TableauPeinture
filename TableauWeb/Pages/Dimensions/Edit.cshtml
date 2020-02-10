@@ -1,0 +1,45 @@
+﻿@page
+@model TableauWeb.Dimensions.EditModel
+
+    <div class="container-fluid">
+        <a asp-page="Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+    </div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Dimension.Hauteur" class="control-label"></label>
+                <input asp-for="Dimension.Hauteur" class="form-control" />
+                <span asp-validation-for="Dimension.Hauteur" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Dimension.Largeur" class="control-label"></label>
+                <input asp-for="Dimension.Largeur" class="form-control" />
+                <span asp-validation-for="Dimension.Largeur" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Dimension.Nom" class="control-label"></label>
+                <input asp-for="Dimension.Nom" class="form-control" />
+                <span asp-validation-for="Dimension.Nom" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Dimension.Id" />
+
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

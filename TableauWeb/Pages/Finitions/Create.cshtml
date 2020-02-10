@@ -1,0 +1,32 @@
+﻿@page
+@model TableauWeb.Finitions.CreateModel
+
+    <div class="container-fluid">
+        <a asp-page="Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+    </div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Finition.Nom" class="control-label"></label>
+                <input asp-for="Finition.Nom" class="form-control" />
+                <span asp-validation-for="Finition.Nom" class="text-danger"></span>
+            </div>
+
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

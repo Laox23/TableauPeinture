@@ -1,0 +1,48 @@
+﻿@page
+@model TableauWeb.Dimensions.DeleteModel
+
+    <div class="container-fluid">
+        <a asp-page="Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+    </div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <h4>Supprimer définitvement la dimension ?</h4>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Dimension.Hauteur)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Dimension.Hauteur)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Dimension.Largeur)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Dimension.Largeur)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Dimension.Nom)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Dimension.Nom)
+                </dd>
+            </dl>
+
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
