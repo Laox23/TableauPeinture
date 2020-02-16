@@ -66,6 +66,13 @@ namespace TableauWeb
 
             app.UseAuthorization();
 
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Tableaux}/{action=Index}/{id?}");
+            //});
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
@@ -77,6 +84,8 @@ namespace TableauWeb
                 //    return context.Response.WriteAsync(json);
                 //});
             });
+
+        
         }
     }
 }

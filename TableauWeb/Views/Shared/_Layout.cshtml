@@ -14,8 +14,8 @@
 </head>
 
 <body>
-    <nav class="navbar justify-content-center mb-5">
-        <a  asp-page="/Tableaux/Index" class="nav-item nav-link">
+    <nav class="navbar justify-content-center">
+        <a asp-area="" asp-page="/Tableaux/Index" class="nav-item nav-link">
             <i class="fa fa-home"></i> Home
         </a>
         <div class="nav-item dropdown">
@@ -28,9 +28,6 @@
                 <a class="nav-item nav-link" asp-area="" asp-page="/Finitions/Index">Finitions</a>
             </div>
         </div>
-        <a asp-area="" asp-page="/Pdf/Index" class="nav-item nav-link">
-            <i class="fa fa-file-pdf-o"></i> Impression
-        </a>
     </nav>
 
     <div class="container-fluid">
@@ -40,10 +37,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container-fluid">
-            <div class="row justify-content-center align-self-center">
-                &copy; Murciano register number - <a asp-area="" asp-page="/Tableaux/Index"><i class="fa fa-home"></i> Home</a>
-            </div>
+        <div class="container">
+            &copy; Murciano register number - <a asp-area="" asp-page="/Tableaux/Index"><i class="fa fa-home"></i> Home</a>
         </div>
     </footer>
 

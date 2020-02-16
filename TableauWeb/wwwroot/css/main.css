@@ -8,19 +8,19 @@ nav {
     font-size: x-large;
 }
 
-nav > a,
-.nav-item > a,
-div.dropdown-menu > a,
-footer > div > a,
-div.recherche ,
-div.container-fluid > a {
-color: rgba(255, 255, 255, .7);
-}
+    nav > a,
+    .nav-item > a,
+    div.dropdown-menu > a,
+    footer > div > div > a,
+    div.recherche,
+    div.container-fluid > a {
+        color: rgba(255, 255, 255, .7);
+    }
 
     nav > a:hover,
     .nav-item > a:hover,
     div.dropdown-menu > a:hover,
-    footer > div > a:hover,
+    footer > div > div > a:hover,
     div.recherche > div > button:hover,
     div.container-fluid > a:hover {
         color: white;

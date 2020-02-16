@@ -82,19 +82,7 @@ namespace TableauWeb.Tableaux
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            Tableau = new Tableau();
-            Tableau.Image = await _context.Images.FirstOrDefaultAsync(m => m.ImageTableauId == ImageTableauId);
-            Tableau.Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.DimensionId == DimensionId);
-            Tableau.Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.FinitionId == FinitionId);
-
-            Tableau.NombreImpression = _context.Tableaux.Count(t => t.Image.ImageTableauId == ImageTableauId) + 1;
-
-            Tableau.NomPdf   = Tableau.Image.Nom.Trim().Replace(" ", "_") + "_" + Tableau.NombreImpression.ToString("D4") + ".pdf";
-
-            _context.Tableaux.Add(Tableau);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./End", new { Tableau.TableauId });
+            return RedirectToPage("./End", new { ImageTableauId, DimensionId, FinitionId });
         }
     }
 }

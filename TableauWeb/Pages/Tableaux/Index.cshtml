@@ -31,9 +31,13 @@
                     <h4 class="card-title">@tableauInfo.Nom</h4>
                     <footer>
                         <p class="float-left">@tableauInfo.NombreImpression</p>
-                        <a asp-page="./Create" asp-route-id="@tableauInfo.ImageTableauId" class="float-right">
-                            <i class="fa fa-check" aria-hidden="true"></i> Selection
-                        </a>
+
+                        @if (tableauInfo.PeutEtreSelectionnee)
+                        {
+                            <a asp-page="./Create" asp-route-id="@tableauInfo.ImageTableauId" class="float-right">
+                                <i class="fa fa-check" aria-hidden="true"></i> Selection
+                            </a>
+                        }
                     </footer>
                 </blockquote>
             </div>

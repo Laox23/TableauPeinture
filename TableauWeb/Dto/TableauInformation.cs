@@ -6,6 +6,7 @@
         public string Nom { get; set; }
         public string NombreImpression { get; set; }
         public int ImageTableauId { get; set; }
+        public bool PeutEtreSelectionnee { get; set; }
     }
 
     public class ImagesInformation

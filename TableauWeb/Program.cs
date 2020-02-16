@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using PdfSharpCore.Fonts;
+using PdfSharpCore.Pdf;
+using PdfSharpCore.Utils;
 
 namespace TableauWeb
 {
@@ -8,8 +11,10 @@ namespace TableauWeb
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
             CreateWebHostBuilder(args).Build().Run();
+
+            GlobalFontSettings.FontResolver = new FontResolver();
+            GlobalFontSettings.DefaultFontEncoding = PdfFontEncoding.WinAnsi;
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

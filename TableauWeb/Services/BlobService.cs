@@ -13,6 +13,7 @@ using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Microsoft.WindowsAzure.Storage.Auth;
 using System.Net.Http.Headers;
 using System.IO;
+using Model;
 
 namespace TableauWeb.Services
 {
@@ -77,6 +78,11 @@ namespace TableauWeb.Services
             }
 
             return newFileName;
+        }
+
+        public Task<string> EcrisOuRetourneLePdfTableau(Tableau tableau)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<string> GetUrlImage(int id)

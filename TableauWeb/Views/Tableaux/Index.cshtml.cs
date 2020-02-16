@@ -11,7 +11,7 @@ using TableauWeb.Data;
 using TableauWeb.Dto;
 using TableauWeb.Services;
 
-namespace TableauWeb.Tableaux
+namespace TableauWeb.Views.Tableaux
 {
     public class IndexModel : PageModel
     {
@@ -64,9 +64,8 @@ namespace TableauWeb.Tableaux
                     ImageTableauId = image.ImageTableauId,
                     UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId),
                     Nom = image.Nom,
-                    NombreImpression = string.Format("({0} / {1})", nombreImpressionDejaFaite, image.MaxImpression),
-                    PeutEtreSelectionnee = nombreImpressionDejaFaite < image.MaxImpression
-                }); ;
+                    NombreImpression = string.Format("({0} / {1})", nombreImpressionDejaFaite, image.MaxImpression)
+                });
             }
 
             TableauxInfo = new Collection<TableauInformation>(TableauxInfo.OrderBy(t => t.ImageTableauId).ToList());
