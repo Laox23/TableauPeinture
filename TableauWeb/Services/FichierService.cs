@@ -5,14 +5,16 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using TableauWeb.Data;
 
 namespace TableauWeb.Services
 {
     public interface IFichierService
     {
-        string CreateFile(IFormFile formFile);
-        string GetUrlImage(int idImage);
+        Task<string> CreateFile(IFormFile formFile);
+        //Task<string> GetUrlImage(string imageNomBase);
+        Task<string> GetUrlImage(int id);
     }
 
     public class FichierService : IFichierService
@@ -30,7 +32,7 @@ namespace TableauWeb.Services
             _environment = environment;
         }
 
-        public string CreateFile(IFormFile formFile)
+        public async Task<string> CreateFile(IFormFile formFile)
         {
             var newFileName = string.Empty;
 
@@ -41,9 +43,9 @@ namespace TableauWeb.Services
                 var FileExtension = Path.GetExtension(fileName);
                 newFileName = myUniqueFileName + FileExtension;
 
-                fileName = Path.Combine(_environment.WebRootPath, _namesService.DossierImagesTableaux + $@"\{newFileName}");
+                fileName = Path.Combine(_environment.WebRootPath, _namesService.DossierImagesTableaux, newFileName);
 
-                using (FileStream fs = System.IO.File.Create(fileName))
+                using (FileStream fs = File.Create(fileName))
                 {
                     formFile.CopyTo(fs);
                     fs.Flush();
@@ -53,12 +55,12 @@ namespace TableauWeb.Services
             return newFileName;
         }
 
-        public string GetUrlImage(int idImage)
+        public async Task<string> GetUrlImage(int id)
         {
-            var imageBase = _context.Set<ImageTableau>().FirstOrDefault(i => i.Id == idImage);
+            var imageBase = _context.Set<ImageTableau>().FirstOrDefault(i => i.ImageTableauId == id);
             if (imageBase != null)
             {
-                return Path.Combine(_namesService.DossierImagesTableaux + $@"\{imageBase.NomBase}");
+                return "/" + Path.Combine(_namesService.DossierImagesTableaux , imageBase.NomBase);
             }
 
             return string.Empty;

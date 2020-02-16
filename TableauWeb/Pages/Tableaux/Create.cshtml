@@ -15,8 +15,8 @@
 
             <div class="container">
                 <div class="row justify-content-around mb-5">
-                    <img src="~/@Model.Image.UrlAffichage" class="center-block rounded" alt="">
-                    <input type="hidden" asp-for="ImageId" value="@Model.Image.ImageId" />
+                    <img src="@Model.Image.UrlAffichage" class="center-block rounded" alt="">
+                    <input type="hidden" asp-for="ImageTableauId" value="@Model.Image.ImageTableauId" />
                 </div>
 
                 <div class="row justify-content-around">
@@ -24,7 +24,7 @@
                         @foreach (var dimension in Model.Dimensions)
                         {
                             <label class="btn btn-large btn-dark">
-                                <input type="radio" asp-for="@Model.DimensionId" value="@dimension.Id"> @Html.DisplayFor(modelItem => dimension.Nom) (@Html.DisplayFor(modelItem => dimension.Hauteur) x @Html.DisplayFor(modelItem => dimension.Largeur))
+                                <input type="radio" asp-for="@Model.DimensionId" value="@dimension.DimensionId"> @Html.DisplayFor(modelItem => dimension.Nom) (@Html.DisplayFor(modelItem => dimension.Hauteur) x @Html.DisplayFor(modelItem => dimension.Largeur))
                             </label>
                         }
                     </div>
@@ -33,7 +33,7 @@
                         @foreach (var finition in Model.Finitions)
                         {
                             <label class="btn btn-large btn-dark">
-                                <input type="radio" asp-for="@Model.FinitionId" value="@finition.Id"> @Html.DisplayFor(modelItem => finition.Nom)
+                                <input type="radio" asp-for="@Model.FinitionId" value="@finition.FinitionId"> @Html.DisplayFor(modelItem => finition.Nom)
                             </label>
                         }
                     </div>

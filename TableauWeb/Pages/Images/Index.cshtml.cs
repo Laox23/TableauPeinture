@@ -35,11 +35,11 @@ namespace TableauWeb.Images
             {
                 Images.Add(new ImagesInformation()
                 {
-                    ImageId = image.Id,
+                    ImageTableauId = image.ImageTableauId,
                     MaxImpression = image.MaxImpression,
                     Nom = image.Nom,
                     NomBase = image.NomBase,
-                    UrlAffichage = _fichierService.GetUrlImage(image.Id)
+                    UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId)
                 });
             }
         }

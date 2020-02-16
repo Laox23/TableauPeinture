@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using System.Linq;
+using System.Threading.Tasks;
 using TableauWeb.Data;
 
 namespace TableauWeb.Finitions
 {
     public class EditModel : PageModel
     {
-        private readonly TableauWeb.Data.TableauxContext _context;
+        private readonly TableauxContext _context;
 
-        public EditModel(TableauWeb.Data.TableauxContext context)
+        public EditModel(TableauxContext context)
         {
             _context = context;
         }
@@ -30,7 +27,7 @@ namespace TableauWeb.Finitions
                 return NotFound();
             }
 
-            Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.Id == id);
+            Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.FinitionId == id);
 
             if (Finition == null)
             {
@@ -56,7 +53,7 @@ namespace TableauWeb.Finitions
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FinitionExists(Finition.Id))
+                if (!FinitionExists(Finition.FinitionId))
                 {
                     return NotFound();
                 }
@@ -71,7 +68,7 @@ namespace TableauWeb.Finitions
 
         private bool FinitionExists(int id)
         {
-            return _context.Finitions.Any(e => e.Id == id);
+            return _context.Finitions.Any(e => e.FinitionId == id);
         }
     }
 }

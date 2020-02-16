@@ -34,7 +34,7 @@ namespace TableauWeb.Images
             {
                 var file = HttpContext.Request.Form.Files.FirstOrDefault();
 
-                var newFileName = _fichierService.CreateFile(file);
+                var newFileName = await _fichierService.CreateFile(file);
 
                 if (!string.IsNullOrWhiteSpace(newFileName))
                 {

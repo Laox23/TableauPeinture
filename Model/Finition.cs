@@ -1,10 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
-    public class Finition : BaseModel
+    public class Finition 
     {
-        [Required]
+        [Required(ErrorMessage = "La valeur est obligatoire")]
+        public int FinitionId { get; set; }
+
+        [Required(ErrorMessage = "La valeur est obligatoire")]
         public string Nom { get; set; }
+
+        [Required(ErrorMessage = "La valeur est obligatoire")]
+        public bool EstActif { get; set; }
+
+
+        [ForeignKey("FinitionId")]
+        public ICollection<Tableau> Tableaux { get; set; }
     }
 }

@@ -31,15 +31,15 @@ namespace TableauWeb.Images
                 return NotFound();
             }
 
-            var image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+            var image = await _context.Images.FirstOrDefaultAsync(m => m.ImageTableauId == id);
 
             Image = new ImagesInformation()
             {
-                ImageId = image.Id,
+                ImageTableauId = image.ImageTableauId,
                 MaxImpression = image.MaxImpression,
                 Nom = image.Nom,
                 NomBase = image.NomBase,
-                UrlAffichage = _fichierService.GetUrlImage(image.Id)
+                UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId)
             };
 
             if (Image == null)
@@ -50,18 +50,13 @@ namespace TableauWeb.Images
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            var imageAUpdate = await _context.Images.FirstOrDefaultAsync(i => i.Id == Image.ImageId);
+            var imageAUpdate = await _context.Images.FirstOrDefaultAsync(i => i.ImageTableauId == Image.ImageTableauId);
             if (imageAUpdate == null)
             {
                 return NotFound();
             }
-
-            //imageAUpdate.Nom = Image.Nom;
-            //imageAUpdate.MaxImpression = Image.MaxImpression;
 
             imageAUpdate.Nom = Image.Nom;
             imageAUpdate.MaxImpression = Image.MaxImpression;
@@ -74,7 +69,7 @@ namespace TableauWeb.Images
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ImageTableauExists(imageAUpdate.Id))
+                if (!ImageTableauExists(imageAUpdate.ImageTableauId))
                 {
                     return NotFound();
                 }
@@ -89,7 +84,7 @@ namespace TableauWeb.Images
 
         private bool ImageTableauExists(int id)
         {
-            return _context.Images.Any(e => e.Id == id);
+            return _context.Images.Any(e => e.ImageTableauId == id);
         }
     }
 }

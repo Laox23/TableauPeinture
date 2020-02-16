@@ -34,15 +34,15 @@ namespace TableauWeb.Images
                 return NotFound();
             }
 
-            var image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+            var image = await _context.Images.FirstOrDefaultAsync(m => m.ImageTableauId == id);
 
             Image = new ImagesInformation()
             {
-                ImageId = image.Id,
+                ImageTableauId = image.ImageTableauId,
                 MaxImpression = image.MaxImpression,
                 Nom = image.Nom,
                 NomBase = image.NomBase,
-                UrlAffichage = _fichierService.GetUrlImage(image.Id)
+                UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId)
             };
 
             if (Image == null)
@@ -55,7 +55,7 @@ namespace TableauWeb.Images
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            var imageADelete = await _context.Images.FirstOrDefaultAsync(i => i.Id == id);
+            var imageADelete = await _context.Images.FirstOrDefaultAsync(i => i.ImageTableauId == id);
             if (imageADelete == null)
             {
                 return NotFound();

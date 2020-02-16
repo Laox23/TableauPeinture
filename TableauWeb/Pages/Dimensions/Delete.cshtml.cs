@@ -25,7 +25,7 @@ namespace TableauWeb.Dimensions
                 return NotFound();
             }
 
-            Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.Id == id);
+            Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.DimensionId == id);
 
             if (Dimension == null)
             {

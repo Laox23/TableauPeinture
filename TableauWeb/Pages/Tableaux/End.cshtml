@@ -1,31 +1,31 @@
 ﻿@page
 @model TableauWeb.Tableaux.EndModel
 
-    <div class="container-fluid">
-        <a asp-page="Index">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
-        </a>
-    </div>
+<div class="container-fluid">
+    <a asp-page="Index">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+    </a>
+
+
+    <form method="post">
+        <button asp-route-id="@Model.Tableau.TableauId" class="float-right">
+            <i class="fa fa-pencil" aria-hidden="true"></i> Imprimer
+        </button>
+    </form>
+</div>
 
 <div class="container">
     <div class="row justify-content-md-center">
-        <form method="post" enctype="multipart/form-data" asp-action="End">
+        <div class="card">
+            <img src="@Model.Image.UrlAffichage" class="card-img-top rounded" alt="Card image cap" />
+            <div class="card-body text-center">
 
-            <div class="card">
-                <img src="~/@Model.Image.UrlAffichage" class="card-img-top rounded" alt="Card image cap" />
-                <div class="card-body text-center">
-
-                    <h4 class="card-text justify-content-md-center">@Model.Image.Nom</h4>
-                    <h4 class="card-text justify-content-md-center">@Model.Tableau.Dimension.Nom (@Model.Tableau.Dimension.Hauteur x @Model.Tableau.Dimension.Largeur)</h4>
-                    <h4 class="card-text justify-content-md-center">@Model.Tableau.Finition.Nom</h4>
-                    <h4 class="card-text justify-content-md-center">@Model.Tableau.TexteImpressionAffichage</h4>
-                </div>
+                <h4 class="card-text justify-content-md-center">@Model.Image.Nom</h4>
+                <h4 class="card-text justify-content-md-center">@Model.Tableau.Dimension.Nom (@Model.Tableau.Dimension.Hauteur x @Model.Tableau.Dimension.Largeur)</h4>
+                <h4 class="card-text justify-content-md-center">@Model.Tableau.Finition.Nom</h4>
+                <h4 class="card-text justify-content-md-center">@Model.Tableau.TexteImpressionAffichage</h4>
             </div>
-
-            <button asp-page="./Impression" asp-route-id="@Model.Tableau.Id">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-            </button>
-        </form>
+        </div>
     </div>
 </div>
 

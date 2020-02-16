@@ -4,19 +4,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
-    public class ImageTableau : BaseModel
+    public class ImageTableau
     {
-        [Required]
+        [Required(ErrorMessage = "La valeur est obligatoire")]
+        public int ImageTableauId { get; set; }
+
+
+        [Required(ErrorMessage = "La valeur est obligatoire")]
         public string NomBase { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La valeur est obligatoire")]
         public string Nom { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La valeur est obligatoire")]
         public int MaxImpression { get; set; }
 
+        [Required(ErrorMessage = "La valeur est obligatoire")]
+        public bool EstActif { get; set; }
 
-        [ForeignKey("ImageId")]
+        [ForeignKey("ImageTableauId")]
         public ICollection<Tableau> Tableaux { get; set; }
     }
 }

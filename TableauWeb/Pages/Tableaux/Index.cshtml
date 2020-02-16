@@ -24,14 +24,14 @@
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-2">
         <div class="card">
 
-            <img src="~/@tableauInfo.UrlAffichage" class="card-img-top rounded" alt="Card image cap" />
+            <img src="@tableauInfo.UrlAffichage" class="card-img-top rounded" alt="Card image cap" />
 
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
                     <h4 class="card-title">@tableauInfo.Nom</h4>
                     <footer>
                         <p class="float-left">@tableauInfo.NombreImpression</p>
-                        <a asp-page="./Create" asp-route-id="@tableauInfo.ImageId" class="float-right">
+                        <a asp-page="./Create" asp-route-id="@tableauInfo.ImageTableauId" class="float-right">
                             <i class="fa fa-check" aria-hidden="true"></i> Selection
                         </a>
                     </footer>

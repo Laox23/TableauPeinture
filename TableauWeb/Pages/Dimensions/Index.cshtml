@@ -24,10 +24,10 @@
                             @Html.DisplayFor(modelItem => item.Nom)
                         </td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.Id">
+                            <a asp-page="./Edit" asp-route-id="@item.DimensionId">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a> |
-                            <a asp-page="./Delete" asp-route-id="@item.Id">
+                            <a asp-page="./Delete" asp-route-id="@item.DimensionId">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>

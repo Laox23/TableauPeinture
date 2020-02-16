@@ -32,7 +32,7 @@ namespace TableauWeb.Tableaux
         public int FinitionId { get; set; }
 
         [BindProperty]
-        public int ImageId { get; set; }
+        public int ImageTableauId { get; set; }
 
 
         public IList<Dimension> Dimensions { get; set; }
@@ -55,15 +55,15 @@ namespace TableauWeb.Tableaux
                 return NotFound();
             }
 
-            var image = await _context.Images.FirstOrDefaultAsync(m => m.Id == id);
+            var image = await _context.Images.FirstOrDefaultAsync(m => m.ImageTableauId == id);
 
             Image = new ImagesInformation()
             {
-                ImageId = image.Id,
+                ImageTableauId = image.ImageTableauId,
                 MaxImpression = image.MaxImpression,
                 Nom = image.Nom,
                 NomBase = image.NomBase,
-                UrlAffichage = _fichierService.GetUrlImage(image.Id)
+                UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId)
             };
 
             if (Image == null)
@@ -83,16 +83,18 @@ namespace TableauWeb.Tableaux
         public async Task<IActionResult> OnPostAsync()
         {
             Tableau = new Tableau();
-            Tableau.Image = await _context.Images.FirstOrDefaultAsync(m => m.Id == ImageId);
-            Tableau.Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.Id == DimensionId);
-            Tableau.Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.Id == FinitionId);
+            Tableau.Image = await _context.Images.FirstOrDefaultAsync(m => m.ImageTableauId == ImageTableauId);
+            Tableau.Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.DimensionId == DimensionId);
+            Tableau.Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.FinitionId == FinitionId);
 
-            Tableau.NombreImpression = _context.Tableaux.Count(t => t.Image.Id == ImageId) + 1;
+            Tableau.NombreImpression = _context.Tableaux.Count(t => t.Image.ImageTableauId == ImageTableauId) + 1;
+
+            Tableau.NomPdf   = Tableau.Image.Nom.Trim().Replace(" ", "_") + "_" + Tableau.NombreImpression.ToString("D4") + ".pdf";
 
             _context.Tableaux.Add(Tableau);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./End", new { Tableau.Id });
+            return RedirectToPage("./End", new { Tableau.TableauId });
         }
     }
 }

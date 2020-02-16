@@ -19,17 +19,17 @@
                     <tr>
                         <td>
                             <div class="row justify-content-around">
-                                <img src="~/@item.UrlAffichage" class="img-fluid" asp-append-version="true" />
+                                <img src="@item.UrlAffichage" class="img-fluid" asp-append-version="true" />
                             </div>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Nom)
                         </td>
                         <td>
-                            <a asp-page="./Edit" asp-route-id="@item.ImageId">
+                            <a asp-page="./Edit" asp-route-id="@item.ImageTableauId">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a> |
-                            <a asp-page="./Delete" asp-route-id="@item.ImageId">
+                            <a asp-page="./Delete" asp-route-id="@item.ImageTableauId">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
@@ -52,48 +51,24 @@ namespace TableauWeb.Tableaux
                 images = await _context.Images.Where(i => i.Nom.Contains(SearchString)).ToListAsync();
             }
 
-            var tableaux = await _context.Tableaux.Where(t => images.Select(i => i.Id).Contains(t.Image.Id)).ToListAsync();
+            var tableaux = await _context.Tableaux.Where(t => images.Select(i => i.ImageTableauId).Contains(t.Image.ImageTableauId)).ToListAsync();
 
             foreach (var image in images)
             {
-                var tableauxDeLimage = tableaux.Where(t => t.ImageId == image.Id);
+                var tableauxDeLimage = tableaux.Where(t => t.ImageTableauId == image.ImageTableauId);
 
                 var nombreImpressionDejaFaite = tableauxDeLimage.Any() ? tableauxDeLimage.Count() : 0;
 
                 TableauxInfo.Add(new TableauInformation()
                 {
-                    ImageId = image.Id,
-                    UrlAffichage = _fichierService.GetUrlImage(image.Id),
+                    ImageTableauId = image.ImageTableauId,
+                    UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId),
                     Nom = image.Nom,
                     NombreImpression = string.Format("({0} / {1})", nombreImpressionDejaFaite, image.MaxImpression)
                 });
             }
 
-            //Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux);
-
-            //var files = Directory.GetFiles(Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux));
-
-            //TableauxInfo.Add(new TableauInformation()
-            //{
-            //    ImageId = 0,
-            //    Url = Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux),
-            //    Nom = Path.Combine(_environment.ContentRootPath, NamesService.DossierImagesTableaux),
-            //    NombreImpression = string.Format("({0} / {1})", 0, 0)
-            //});
-
-            //for (int i = 0; i < files.Length; i++)
-            //{
-            //    TableauxInfo.Add(new TableauInformation()
-            //    {
-            //        ImageId =i+ 1,
-            //        Url = files[i],
-            //        Nom = files[i],
-            //        NombreImpression = string.Format("({0} / {1})",0,0)
-            //    });
-            //}
-
-            TableauxInfo = new Collection<TableauInformation>(TableauxInfo.OrderBy(t => t.ImageId).ToList());
+            TableauxInfo = new Collection<TableauInformation>(TableauxInfo.OrderBy(t => t.ImageTableauId).ToList());
         }
-
     }
 }

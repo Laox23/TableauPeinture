@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TableauWeb.Dto
+﻿namespace TableauWeb.Dto
 {
     public class TableauInformation
     {
         public string UrlAffichage { get; set; }
         public string Nom { get; set; }
         public string NombreImpression { get; set; }
-        public int ImageId { get; set; }
+        public int ImageTableauId { get; set; }
     }
 
     public class ImagesInformation
     {
-        public int ImageId { get; set; }
+        public int ImageTableauId { get; set; }
 
         public string UrlAffichage { get; set; }
 

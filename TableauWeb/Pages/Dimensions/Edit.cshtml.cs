@@ -26,7 +26,7 @@ namespace TableauWeb.Dimensions
                 return NotFound();
             }
 
-            Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.Id == id);
+            Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.DimensionId == id);
 
             if (Dimension == null)
             {
@@ -52,7 +52,7 @@ namespace TableauWeb.Dimensions
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DimensionExists(Dimension.Id))
+                if (!DimensionExists(Dimension.DimensionId))
                 {
                     return NotFound();
                 }
@@ -67,7 +67,7 @@ namespace TableauWeb.Dimensions
 
         private bool DimensionExists(int id)
         {
-            return _context.Dimensions.Any(e => e.Id == id);
+            return _context.Dimensions.Any(e => e.DimensionId == id);
         }
     }
 }

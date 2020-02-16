@@ -29,7 +29,7 @@ namespace TableauWeb.Finitions
                 return NotFound();
             }
 
-            Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.Id == id);
+            Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.FinitionId == id);
 
             if (Finition == null)
             {
