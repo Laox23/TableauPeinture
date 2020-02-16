@@ -22,14 +22,14 @@ namespace TableauWeb.Dimensions
         [BindProperty]
         public Dimension Dimension { get; set; }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            Dimension.EstActif = true;
 
             _context.Dimensions.Add(Dimension);
             await _context.SaveChangesAsync();

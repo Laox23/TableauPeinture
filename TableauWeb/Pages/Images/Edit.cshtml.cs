@@ -39,6 +39,7 @@ namespace TableauWeb.Images
                 MaxImpression = image.MaxImpression,
                 Nom = image.Nom,
                 NomBase = image.NomBase,
+                EstActif = image.EstActif,
                 UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId)
             };
 
@@ -58,8 +59,7 @@ namespace TableauWeb.Images
                 return NotFound();
             }
 
-            imageAUpdate.Nom = Image.Nom;
-            imageAUpdate.MaxImpression = Image.MaxImpression;
+            Image.NomBase = imageAUpdate.NomBase;
 
             try
             {

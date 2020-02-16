@@ -17,19 +17,30 @@
             <tbody>
                 @foreach (var item in Model.Finition)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nom)
-                        </td>
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.FinitionId">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a> |
-                            <a asp-page="./Delete" asp-route-id="@item.FinitionId">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nom)
+                    </td>
+                    <td>
+                        @if (item.EstActif)
+                        {
+                            <i class="fa fa-power-off" style="color:black"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-power-off" style="color:lightgray"></i>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.FinitionId">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        @*|
+                        <a asp-page="./Delete" asp-route-id="@item.FinitionId">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>*@
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

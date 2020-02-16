@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TableauWeb.Data;
 using TableauWeb.Dto;
 using TableauWeb.Services;
+using System.Linq;
 
 namespace TableauWeb.Images
 {
@@ -28,7 +29,7 @@ namespace TableauWeb.Images
 
         public async Task OnGetAsync()
         {
-            var images = await _context.Images.ToListAsync();
+            var images = await _context.Images.OrderByDescending(i => i.EstActif).ToListAsync();
 
             Images = new Collection<ImagesInformation>();
             foreach (var image in images)
@@ -39,6 +40,7 @@ namespace TableauWeb.Images
                     MaxImpression = image.MaxImpression,
                     Nom = image.Nom,
                     NomBase = image.NomBase,
+                    EstActif = image.EstActif,
                     UrlAffichage = await _fichierService.GetUrlImage(image.ImageTableauId)
                 });
             }

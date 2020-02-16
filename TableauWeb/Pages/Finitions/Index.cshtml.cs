@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Model;
 using TableauWeb.Data;
 
 namespace TableauWeb.Finitions
 {
     public class IndexModel : PageModel
     {
-        private readonly TableauWeb.Data.TableauxContext _context;
+        private readonly TableauxContext _context;
 
-        public IndexModel(TableauWeb.Data.TableauxContext context)
+        public IndexModel(TableauxContext context)
         {
             _context = context;
         }
@@ -23,7 +21,7 @@ namespace TableauWeb.Finitions
 
         public async Task OnGetAsync()
         {
-            Finition = await _context.Finitions.ToListAsync();
+            Finition = await _context.Finitions.OrderByDescending(i => i.EstActif).ToListAsync();
         }
     }
 }

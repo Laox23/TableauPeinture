@@ -82,8 +82,6 @@ namespace TableauWeb.Services
 
             var image = await _context.Images.FirstOrDefaultAsync(t => t.ImageTableauId == tableau.ImageTableauId);
 
-       
-
             var document = new PdfDocument();
             var page = document.AddPage();
             var gfx = XGraphics.FromPdfPage(page);

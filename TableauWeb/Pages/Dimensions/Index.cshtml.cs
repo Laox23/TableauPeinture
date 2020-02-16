@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Model;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using TableauWeb.Data;
 
 namespace TableauWeb.Dimensions
 {
     public class IndexModel : PageModel
     {
-        private readonly TableauWeb.Data.TableauxContext _context;
+        private readonly TableauxContext _context;
 
-        public IndexModel(TableauWeb.Data.TableauxContext context)
+        public IndexModel(TableauxContext context)
         {
             _context = context;
         }
@@ -19,7 +21,7 @@ namespace TableauWeb.Dimensions
 
         public async Task OnGetAsync()
         {
-            Dimension = await _context.Dimensions.ToListAsync();
+            Dimension = await _context.Dimensions.OrderByDescending(i => i.EstActif).ToListAsync();
         }
     }
 }

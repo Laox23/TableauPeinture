@@ -21,5 +21,6 @@
 
         public int MaxImpression { get; set; }
 
+        public bool EstActif { get; set; }
     }
 }

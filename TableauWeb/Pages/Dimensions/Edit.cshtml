@@ -30,6 +30,11 @@
                 <input asp-for="Dimension.Nom" class="form-control" />
                 <span asp-validation-for="Dimension.Nom" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Dimension.EstActif" class="control-label">Actif </label>
+                <input type="checkbox" asp-for="Dimension.EstActif" />
+            </div>
+
             <input type="hidden" asp-for="Dimension.DimensionId" />
 
             <div class="ml-auto">

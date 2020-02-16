@@ -39,10 +39,10 @@ namespace TableauWeb.Images
                 if (!string.IsNullOrWhiteSpace(newFileName))
                 {
                     ImageTableau.NomBase = newFileName;
+                    ImageTableau.EstActif = true;
 
                     _context.Images.Add(ImageTableau);
                     await _context.SaveChangesAsync();
-
                 }
 
             }

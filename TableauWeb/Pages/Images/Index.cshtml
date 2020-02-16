@@ -29,12 +29,23 @@
                         @Html.DisplayFor(modelItem => item.MaxImpression)
                     </td>
                     <td>
+                        @if (item.EstActif)
+                        {
+                            <i class="fa fa-power-off" style="color:black"></i>
+                        }
+                        else
+                        {
+                             <i class="fa fa-power-off" style="color:lightgray"></i>
+                        }
+                    </td>
+                    <td>
                         <a asp-page="./Edit" asp-route-id="@item.ImageTableauId">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a> |
+                        </a> 
+                        @*|
                         <a asp-page="./Delete" asp-route-id="@item.ImageTableauId">
                             <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
+                        </a>*@
                     </td>
                 </tr>
                 }

@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <img src="@Model.Image.UrlAffichage" class="img-fluid" asp-append-version="true" />
-            </div> 
+            </div>
 
             <div class="form-group">
                 <label asp-for="Image.Nom" class="control-label"></label>
@@ -26,6 +26,10 @@
                 <label asp-for="Image.MaxImpression" class="control-label">Nom d'impression maximum</label>
                 <input asp-for="Image.MaxImpression" class="form-control" />
                 <span asp-validation-for="Image.MaxImpression" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image.EstActif" class="control-label">Actif </label>
+                <input type="checkbox" asp-for="Image.EstActif" />
             </div>
 
             <input type="hidden" asp-for="Image.ImageTableauId" />
