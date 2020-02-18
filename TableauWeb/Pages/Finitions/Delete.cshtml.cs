@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Model;
+using TableauWeb.Model;
 using TableauWeb.Data;
 
 namespace TableauWeb.Finitions

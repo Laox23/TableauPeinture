@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Model;
+using TableauWeb.Model;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;

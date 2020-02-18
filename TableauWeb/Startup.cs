@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TableauWeb.Data;
+using TableauWeb.Model;
 using TableauWeb.Services;
 
 namespace TableauWeb
@@ -28,11 +30,45 @@ namespace TableauWeb
                 options.Conventions.AddPageRoute("/Tableaux/Index", "");
             });
 
-            //services.AddDbContext<TableauxContext>(options =>
-            //    options.UseNpgsql("Server=localhost;Port=5432;Database=Tableaux;User Id=Ni;Password=Ni;"));
-
             services.AddDbContext<TableauxContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("TableauxContext")));
+
+            services.AddIdentity<Utilisateur, IdentityRole>()
+                .AddEntityFrameworkStores<TableauxContext>();
+
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //    .AddEntityFrameworkStores<TableauxContext>();
+
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    // Password settings.
+            //    options.Password.RequireDigit = true;
+            //    options.Password.RequireLowercase = true;
+            //    options.Password.RequireNonAlphanumeric = true;
+            //    options.Password.RequireUppercase = true;
+            //    options.Password.RequiredLength = 6;
+            //    options.Password.RequiredUniqueChars = 1;
+
+            //    // Lockout settings.
+            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            //    options.Lockout.MaxFailedAccessAttempts = 5;
+            //    options.Lockout.AllowedForNewUsers = true;
+
+            //    // User settings.
+            //    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            //    options.User.RequireUniqueEmail = false;
+            //});
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    // Cookie settings
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+            //    options.LoginPath = "/Identity/Account/Login";
+            //    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            //    options.SlidingExpiration = true;
+            //});
 
             services.AddSingleton<NamesService>();
 
@@ -57,13 +93,12 @@ namespace TableauWeb
             //}
 
             app.UseDeveloperExceptionPage();
-
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //app.UseEndpoints(endpoints =>

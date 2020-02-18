@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using TableauWeb.Model
+@inject SignInManager<Utilisateur> SignInManager
+@inject UserManager<Utilisateur> UserManager
+
+<!DOCTYPE html>
 <html lang="fr-fr">
 <head>
     <meta charset="utf-8">
@@ -15,27 +20,33 @@
 
 <body>
     <nav class="navbar justify-content-center mb-5">
-        <a  asp-page="/Tableaux/Index" class="nav-item nav-link">
+        <a asp-page="/Tableaux/Index" class="nav-item nav-link">
             <i class="fa fa-home"></i> Home
         </a>
-        <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-cogs"></i> Paramétres
-            </a>
-            <div class="dropdown-menu">
-                <a class="nav-item nav-link" asp-area="" asp-page="/Images/Index">Images</a>
-                <a class="nav-item nav-link" asp-area="" asp-page="/Dimensions/Index">Dimensions</a>
-                <a class="nav-item nav-link" asp-area="" asp-page="/Finitions/Index">Finitions</a>
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-cogs"></i> Paramétres
+                </a>
+                <div class="dropdown-menu">
+                    <a class="nav-item nav-link" asp-area="" asp-page="/Images/Index">Images</a>
+                    <a class="nav-item nav-link" asp-area="" asp-page="/Dimensions/Index">Dimensions</a>
+                    <a class="nav-item nav-link" asp-area="" asp-page="/Finitions/Index">Finitions</a>
+                </div>
             </div>
-        </div>
-        <a asp-area="" asp-page="/Pdf/Index" class="nav-item nav-link">
-            <i class="fa fa-file-pdf-o"></i> Impression
-        </a>
+            <a asp-area="" asp-page="/Pdf/Index" class="nav-item nav-link">
+                <i class="fa fa-file-pdf-o"></i> Impression
+            </a>
+        }
+
+        <partial name="_LoginPartial" />
     </nav>
 
     <div class="container-fluid">
-      @*  <main role="main" class="pb-3">*@
-            @RenderBody()
+        @*  <main role="main" class="pb-3">*@
+        @RenderBody()
         @*</main>*@
     </div>
 

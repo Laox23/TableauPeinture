@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Model;
+using TableauWeb.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace TableauWeb.Tableaux
         private readonly IWebHostEnvironment _environment;
         private readonly IFichierService _fichierService;
 
+        //private UserManager<IdentityUser> _userManager;
+
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
@@ -28,17 +31,22 @@ namespace TableauWeb.Tableaux
             IWebHostEnvironment environment,
             NamesService namesService,
             IFichierService fichierService)
+          // UserManager<IdentityUser> userManager)
         {
             _context = context;
             NamesService = namesService;
             _environment = environment;
             _fichierService = fichierService;
+
+            //_userManager = userManager;
         }
 
         public Collection<TableauInformation> TableauxInfo { get; set; }
 
         public async Task OnGetAsync()
         {
+           // var t = _userManager.GetUserId(new System.Security.Claims.ClaimsPrincipal());
+
             var images = new List<ImageTableau>();
             TableauxInfo = new Collection<TableauInformation>();
 

@@ -13,7 +13,7 @@ using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Microsoft.WindowsAzure.Storage.Auth;
 using System.Net.Http.Headers;
 using System.IO;
-using Model;
+using TableauWeb.Model;
 
 namespace TableauWeb.Services
 {
