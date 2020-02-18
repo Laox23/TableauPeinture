@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Data.Config;
 using TableauWeb.Model;
 
 namespace TableauWeb.Data
 {
-    public class TableauxContext : IdentityDbContext<Utilisateur>
+    public class TableauxContext :  IdentityDbContext<Utilisateur, Role, string, IdentityUserClaim<string>,
+        UtilisateurRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public TableauxContext(DbContextOptions<TableauxContext> options)
            : base(options)
@@ -15,8 +16,23 @@ namespace TableauWeb.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UtilisateurConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.Entity<UtilisateurRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UtilisateursRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.Utilisateur)
+                    .WithMany(r => r.UtilisateursRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
+            //modelBuilder.ApplyConfiguration(new UtilisateurConfiguration());
+            //modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
 
         public DbSet<Finition> Finitions { get; set; }

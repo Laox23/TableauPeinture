@@ -1,0 +1,43 @@
+﻿@page
+@model TableauWeb.Utilisateurs.IndexModel
+
+<div class="container-fluid">
+    <a asp-page="/Tableaux/Index">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+    </a>
+    <a asp-page="Create" class="float-right">
+        <i class="fa fa-plus" aria-hidden="true"></i> Nouveau
+    </a>
+</div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <table class="table table-hover table-striped">
+            <tbody>
+                @foreach (var item in Model.Utilisateurs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UtilisateursRoles.FirstOrDefault().Role.Name)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                            @*|
+                                <a asp-page="./Delete" asp-route-id="@item.DimensionId">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

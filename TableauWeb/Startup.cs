@@ -33,42 +33,15 @@ namespace TableauWeb
             services.AddDbContext<TableauxContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("TableauxContext")));
 
-            services.AddIdentity<Utilisateur, IdentityRole>()
-                .AddEntityFrameworkStores<TableauxContext>();
+            services.AddIdentity<Utilisateur, Role>(options => options.Stores.MaxLengthForKeys = 128)
+            .AddEntityFrameworkStores<TableauxContext>()
+            .AddDefaultTokenProviders();
+
+            //services.AddIdentity<Utilisateur, IdentityRole>()
+            //    .AddEntityFrameworkStores<TableauxContext>();
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             //    .AddEntityFrameworkStores<TableauxContext>();
-
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    // Password settings.
-            //    options.Password.RequireDigit = true;
-            //    options.Password.RequireLowercase = true;
-            //    options.Password.RequireNonAlphanumeric = true;
-            //    options.Password.RequireUppercase = true;
-            //    options.Password.RequiredLength = 6;
-            //    options.Password.RequiredUniqueChars = 1;
-
-            //    // Lockout settings.
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            //    options.Lockout.MaxFailedAccessAttempts = 5;
-            //    options.Lockout.AllowedForNewUsers = true;
-
-            //    // User settings.
-            //    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            //    options.User.RequireUniqueEmail = false;
-            //});
-
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    // Cookie settings
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-            //    options.LoginPath = "/Identity/Account/Login";
-            //    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            //    options.SlidingExpiration = true;
-            //});
 
             services.AddSingleton<NamesService>();
 
@@ -79,7 +52,8 @@ namespace TableauWeb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            UserManager<Utilisateur> userManager, RoleManager<Role> roleManager)
         {
             //if (env.IsDevelopment())
             //{
@@ -100,6 +74,8 @@ namespace TableauWeb
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            UtilisateurDataInitializer.SeedData(userManager, roleManager);
 
             //app.UseEndpoints(endpoints =>
             //{

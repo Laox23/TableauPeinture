@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using TableauWeb.Data
 @using TableauWeb.Model
 @inject SignInManager<Utilisateur> SignInManager
 @inject UserManager<Utilisateur> UserManager
@@ -25,17 +26,25 @@
         </a>
 
         @if (SignInManager.IsSignedIn(User))
-        {
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-cogs"></i> Paramétres
-                </a>
-                <div class="dropdown-menu">
-                    <a class="nav-item nav-link" asp-area="" asp-page="/Images/Index">Images</a>
-                    <a class="nav-item nav-link" asp-area="" asp-page="/Dimensions/Index">Dimensions</a>
-                    <a class="nav-item nav-link" asp-area="" asp-page="/Finitions/Index">Finitions</a>
+        { 
+            if (User.IsInRole(Constantes.Role_Redacteur) || User.IsInRole(Constantes.Role_Admin))
+            {
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cogs"></i> Paramétres
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Images/Index">Images</a>
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Dimensions/Index">Dimensions</a>
+                        <a class="nav-item nav-link" asp-area="" asp-page="/Finitions/Index">Finitions</a>
+                        @if (User.IsInRole(Constantes.Role_Admin))
+                        {
+                            <a class="nav-item nav-link" asp-area="" asp-page="/Utilisateurs/Index">Utilisateur</a>
+                        }
+                    </div>
                 </div>
-            </div>
+            }
+
             <a asp-area="" asp-page="/Pdf/Index" class="nav-item nav-link">
                 <i class="fa fa-file-pdf-o"></i> Impression
             </a>

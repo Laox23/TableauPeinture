@@ -17,10 +17,7 @@ namespace TableauWeb.Tableaux
     public class IndexModel : PageModel
     {
         private readonly TableauxContext _context;
-        private readonly IWebHostEnvironment _environment;
         private readonly IFichierService _fichierService;
-
-        //private UserManager<IdentityUser> _userManager;
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
@@ -28,25 +25,18 @@ namespace TableauWeb.Tableaux
         public NamesService NamesService { get; set; }
 
         public IndexModel(TableauxContext context,
-            IWebHostEnvironment environment,
             NamesService namesService,
             IFichierService fichierService)
-          // UserManager<IdentityUser> userManager)
         {
             _context = context;
             NamesService = namesService;
-            _environment = environment;
             _fichierService = fichierService;
-
-            //_userManager = userManager;
         }
 
         public Collection<TableauInformation> TableauxInfo { get; set; }
 
         public async Task OnGetAsync()
         {
-           // var t = _userManager.GetUserId(new System.Security.Claims.ClaimsPrincipal());
-
             var images = new List<ImageTableau>();
             TableauxInfo = new Collection<TableauInformation>();
 

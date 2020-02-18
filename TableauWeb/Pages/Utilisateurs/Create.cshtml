@@ -1,0 +1,52 @@
+﻿@page
+@model TableauWeb.Utilisateurs.CreateModel
+
+
+<div class="container-fluid">
+    <a asp-page="Index">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+    </a>
+</div>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Utilisateur.Nom" class="control-label"></label>
+                <input asp-for="Utilisateur.Nom" class="form-control" />
+                <span asp-validation-for="Utilisateur.Nom" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Utilisateur.Password"></label>
+                <input asp-for="Utilisateur.Password" class="form-control" />
+                <span asp-validation-for="Utilisateur.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Utilisateur.ConfirmPassword"></label>
+                <input asp-for="Utilisateur.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Utilisateur.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <select asp-for="Utilisateur.Role" asp-items="@Model.Roles">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Utilisateur.Role" class="text-danger"></span>
+            </div>
+           
+            <div class="ml-auto">
+                <button class="btn ml-auto"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
