@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using TableauWeb.Data;
 using TableauWeb.Dto;
 using TableauWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TableauWeb.Tableaux
 {
+    [Authorize]
     public class ShowModel : PageModel
     {
         private readonly IFichierService _fichierService;

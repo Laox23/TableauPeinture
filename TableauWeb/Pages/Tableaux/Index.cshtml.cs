@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
 using TableauWeb.Dto;
+using TableauWeb.Model;
 using TableauWeb.Services;
 
 namespace TableauWeb.Tableaux
@@ -48,7 +47,7 @@ namespace TableauWeb.Tableaux
             {
                 images = await _context.Images.Where(i => i.Nom.Contains(SearchString)).ToListAsync();
             }
-
+       
             var tableaux = await _context.Tableaux.Where(t => images.Select(i => i.ImageTableauId).Contains(t.Image.ImageTableauId)).ToListAsync();
 
             foreach (var image in images)

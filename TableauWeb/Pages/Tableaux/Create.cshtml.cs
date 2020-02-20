@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using TableauWeb.Data;
 using TableauWeb.Dto;
 using TableauWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TableauWeb.Tableaux
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly IFichierService _fichierService;
@@ -71,8 +73,8 @@ namespace TableauWeb.Tableaux
                 return NotFound();
             }
 
-            Dimensions = await _context.Dimensions.OrderByDescending(d => d.Hauteur).ToListAsync();
-            Finitions = await _context.Finitions.ToListAsync();
+            Dimensions = await _context.Dimensions.Where(t => t.EstActif == true).OrderByDescending(d => d.Hauteur).ToListAsync();
+            Finitions = await _context.Finitions.Where(t => t.EstActif == true).ToListAsync();
 
             return Page();
         }

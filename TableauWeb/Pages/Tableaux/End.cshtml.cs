@@ -1,25 +1,23 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-
-using TableauWeb.Model;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
 using TableauWeb.Dto;
+using TableauWeb.Model;
 using TableauWeb.Services;
 
 namespace TableauWeb.Tableaux
 {
+    [Authorize]
     public class EndModel : PageModel
     {
         private readonly IFichierService _fichierService;
         private readonly TableauxContext _context;
-
-        private IWebHostEnvironment _webHostEnvironment;
-        private NamesService _namesService { get; set; }
+        private UserManager<Utilisateur> _userManager;
 
         public Tableau Tableau { get; set; }
 
@@ -33,15 +31,13 @@ namespace TableauWeb.Tableaux
         [BindProperty]
         public int FinitionId { get; set; }
 
-        public EndModel(IWebHostEnvironment webHostEnvironment,
-                            TableauxContext context,
-                            IFichierService fichierService,
-                            NamesService namesService)
+        public EndModel(TableauxContext context,
+            IFichierService fichierService,
+           UserManager<Utilisateur> userManager)
         {
             _context = context;
             _fichierService = fichierService;
-            _webHostEnvironment = webHostEnvironment;
-            _namesService = namesService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> OnGetAsync(int imageTableauId, int dimensionId, int finitionId)
@@ -83,13 +79,16 @@ namespace TableauWeb.Tableaux
                 var image = await _context.Images.FirstOrDefaultAsync(m => m.ImageTableauId == ImageTableauId);
                 var nombresImpression = _context.Tableaux.Count(t => t.Image.ImageTableauId == ImageTableauId) + 1;
 
+                var utilisateur = await _userManager.GetUserAsync(User);
+
                 Tableau = new Tableau()
                 {
                     Image = image,
                     Dimension = await _context.Dimensions.FirstOrDefaultAsync(m => m.DimensionId == DimensionId),
                     Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.FinitionId == FinitionId),
                     NombreImpression = nombresImpression,
-                    NomPdf = image.Nom.Trim().Replace(" ", "_") + "_" + nombresImpression.ToString("D4") + ".pdf"
+                    NomPdf = image.Nom.Trim().Replace(" ", "_") + "_" + nombresImpression.ToString("D4") + ".pdf",
+                    Utilisateur = utilisateur
                 };
 
                 _context.Tableaux.Add(Tableau);

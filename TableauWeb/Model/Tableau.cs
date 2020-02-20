@@ -16,6 +16,10 @@ namespace TableauWeb.Model
         [Required]
         public int FinitionId { get; set; }
 
+        //[Required]
+        //public Utilisateur UtilisateurId { get; set; }
+
+
         [Required(ErrorMessage = "La valeur est obligatoire")]
         [Range(0, 10000, ErrorMessage = "La largeur doit être positive")]
         public int NombreImpression { get; set; }
@@ -27,7 +31,7 @@ namespace TableauWeb.Model
         public ImageTableau Image { get; set; }
         public Dimension Dimension { get; set; }
         public Finition Finition { get; set; }
-
+        public Utilisateur Utilisateur { get; set; }
 
         public string TexteImpressionAffichage
         {

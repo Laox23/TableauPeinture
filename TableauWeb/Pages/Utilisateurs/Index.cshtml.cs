@@ -14,16 +14,13 @@ namespace TableauWeb.Utilisateurs
     public class IndexModel : PageModel
     {
         private UserManager<Utilisateur> _userManager;
-        private RoleManager<Role> _roleManager;
 
         [BindProperty(SupportsGet = true)]
         public IList<Utilisateur> Utilisateurs { get; set; }
 
-        public IndexModel(UserManager<Utilisateur> userManager,
-         RoleManager<Role> roleManager)
+        public IndexModel(UserManager<Utilisateur> userManager)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
         }
 
         public async Task OnGetAsync()

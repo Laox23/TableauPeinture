@@ -33,12 +33,12 @@
             </div>
 
             <div class="form-group">
-                <select asp-for="Utilisateur.Role" asp-items="@Model.Roles">
+                <label for="exampleFormControlSelect1">Role</label>
+                <select asp-for="Utilisateur.Role" asp-items="@Model.Roles" class="form-control" id="exampleFormControlSelect1">
                     <option value=""></option>
                 </select>
-                <span asp-validation-for="Utilisateur.Role" class="text-danger"></span>
             </div>
-           
+
             <div class="ml-auto">
                 <button class="btn ml-auto"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
             </div>

@@ -10,6 +10,7 @@ using System.Linq;
 using TableauWeb.Data;
 using TableauWeb.Dto;
 using TableauWeb.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace TableauWeb.Pdf
 {
@@ -17,6 +18,7 @@ namespace TableauWeb.Pdf
     {
         private readonly IFichierService _fichierService;
         private readonly TableauxContext _context;
+        private UserManager<Utilisateur> _userManager;
 
         private IWebHostEnvironment _webHostEnvironment;
         private NamesService _namesService { get; set; }
@@ -24,12 +26,14 @@ namespace TableauWeb.Pdf
         public IndexModel(IWebHostEnvironment webHostEnvironment,
                             TableauxContext context,
                             IFichierService fichierService,
-                            NamesService namesService)
+                            NamesService namesService,
+                            UserManager<Utilisateur> userManager)
         {
             _context = context;
             _fichierService = fichierService;
             _webHostEnvironment = webHostEnvironment;
             _namesService = namesService;
+            _userManager = userManager;
         }
 
         public IList<Tableau> Tableaux { get; set; }
@@ -39,9 +43,19 @@ namespace TableauWeb.Pdf
             var tableaux = _context.Tableaux
                 .Include(t => t.Dimension)
                 .Include(t => t.Finition)
-                .Include(t => t.Image);
+                .Include(t => t.Image)
+                .Include(t => t.Utilisateur);
 
-            Tableaux = await tableaux.OrderBy(t => t.ImageTableauId).ToListAsync();
+            var utilisateur = await _userManager.GetUserAsync(User);
+
+            if (!User.IsInRole(Constantes.Role_Admin) && !User.IsInRole(Constantes.Role_Redacteur))
+            {
+                Tableaux = await tableaux.Where(i => i.Utilisateur.Id == utilisateur.Id).ToListAsync();
+            }
+            else
+            {
+                Tableaux = await tableaux.OrderBy(t => t.ImageTableauId).ToListAsync();
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
