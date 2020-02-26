@@ -10,14 +10,14 @@ using TableauWeb.Data;
 namespace TableauWeb.Migrations
 {
     [DbContext(typeof(TableauxContext))]
-    [Migration("20200218220330_AjoutUitilisateurTableau")]
-    partial class AjoutUitilisateurTableau
+    [Migration("20200226184032_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

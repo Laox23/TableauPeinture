@@ -3,73 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TableauWeb.Data;
 
 namespace TableauWeb.Migrations
 {
     [DbContext(typeof(TableauxContext))]
-    [Migration("20200217211739_Identuty2")]
-    partial class Identuty2
+    partial class TableauxContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "92f88a80-fa82-47ce-940d-0ce50da00f1e",
-                            ConcurrencyStamp = "693776c7-99a6-414c-826a-5112a58319d7",
-                            Name = "Utilisateur",
-                            NormalizedName = "UTILISATEUR"
-                        },
-                        new
-                        {
-                            Id = "8e377108-955c-44b8-8b03-ecf401397e2b",
-                            ConcurrencyStamp = "5d44af32-0b7b-4cd4-89f3-34c05c09dc2f",
-                            Name = "Redacteur",
-                            NormalizedName = "REDACTEUR"
-                        },
-                        new
-                        {
-                            Id = "e141f344-b4e7-4fa4-9709-50307e32b313",
-                            ConcurrencyStamp = "03f96a87-90b4-42dc-807b-4c68085c892a",
-                            Name = "Administrateur",
-                            NormalizedName = "ADMINISTRATEUR"
-                        });
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -93,86 +41,6 @@ namespace TableauWeb.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "3e7ae52a-fe23-4750-861b-bbab19ca1c3c",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "23b0f039-c421-4cf6-87bf-d8b9193ff5f9",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "Administrateur",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "aa936f6a-a89a-4aa5-8dc3-f3ac9d3d21cf",
-                            TwoFactorEnabled = false,
-                            UserName = "Administrateur"
-                        },
-                        new
-                        {
-                            Id = "55db3efc-9894-425e-bc77-77c3cec9a7c8",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f06ffd8a-3c9b-4e9e-af3b-e3b2624c9d93",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "Redacteur",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc1217e3-9b22-4a60-8ba7-4dcd58b3b48b",
-                            TwoFactorEnabled = false,
-                            UserName = "Redacteur"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -202,10 +70,12 @@ namespace TableauWeb.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -221,31 +91,18 @@ namespace TableauWeb.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -325,6 +182,33 @@ namespace TableauWeb.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("TableauWeb.Model.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
             modelBuilder.Entity("TableauWeb.Model.Tableau", b =>
                 {
                     b.Property<int>("TableauId")
@@ -348,6 +232,9 @@ namespace TableauWeb.Migrations
                     b.Property<int>("NombreImpression")
                         .HasColumnType("int");
 
+                    b.Property<string>("UtilisateurId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("TableauId");
 
                     b.HasIndex("DimensionId");
@@ -355,6 +242,8 @@ namespace TableauWeb.Migrations
                     b.HasIndex("FinitionId");
 
                     b.HasIndex("ImageTableauId");
+
+                    b.HasIndex("UtilisateurId");
 
                     b.ToTable("Tableaux");
                 });
@@ -424,9 +313,24 @@ namespace TableauWeb.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TableauWeb.Model.UtilisateurRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("TableauWeb.Model.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -444,21 +348,6 @@ namespace TableauWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TableauWeb.Model.Utilisateur", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TableauWeb.Model.Utilisateur", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -492,6 +381,25 @@ namespace TableauWeb.Migrations
                     b.HasOne("TableauWeb.Model.ImageTableau", "Image")
                         .WithMany("Tableaux")
                         .HasForeignKey("ImageTableauId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TableauWeb.Model.Utilisateur", "Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UtilisateurId");
+                });
+
+            modelBuilder.Entity("TableauWeb.Model.UtilisateurRole", b =>
+                {
+                    b.HasOne("TableauWeb.Model.Role", "Role")
+                        .WithMany("UtilisateursRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TableauWeb.Model.Utilisateur", "Utilisateur")
+                        .WithMany("UtilisateursRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
