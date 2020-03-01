@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TableauWeb.Dimensions
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TableauxContext _context;

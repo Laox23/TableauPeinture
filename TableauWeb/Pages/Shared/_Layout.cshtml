@@ -21,12 +21,14 @@
 
 <body>
     <nav class="navbar justify-content-center mb-5">
-        <a asp-page="/Tableaux/Index" class="nav-item nav-link">
-            <i class="fa fa-home"></i> Home
-        </a>
+
 
         @if (SignInManager.IsSignedIn(User))
-        { 
+        {
+            <a asp-page="/Tableaux/Index" class="nav-item nav-link">
+                <i class="fa fa-home"></i> Home
+            </a>
+
             if (User.IsInRole(Constantes.Role_Redacteur) || User.IsInRole(Constantes.Role_Admin))
             {
                 <div class="nav-item dropdown">

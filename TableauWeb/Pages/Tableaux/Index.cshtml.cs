@@ -13,6 +13,7 @@ using TableauWeb.Services;
 
 namespace TableauWeb.Tableaux
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TableauxContext _context;

@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Model;
 using System.Linq;
 using System.Threading.Tasks;
+using TableauWeb.Data;
+using TableauWeb.Model;
 
 namespace TableauWeb.Dimensions
 {
+    [Authorize]
     public class EditModel : PageModel
     {
-        private readonly TableauWeb.Data.TableauxContext _context;
+        private readonly TableauxContext _context;
 
-        public EditModel(TableauWeb.Data.TableauxContext context)
+        public EditModel(TableauxContext context)
         {
             _context = context;
         }
@@ -35,8 +38,6 @@ namespace TableauWeb.Dimensions
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

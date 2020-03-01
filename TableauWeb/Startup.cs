@@ -20,7 +20,6 @@ namespace TableauWeb
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
@@ -38,16 +37,9 @@ namespace TableauWeb
             .AddEntityFrameworkStores<TableauxContext>()
             .AddDefaultTokenProviders();
 
-            //services.AddIdentity<Utilisateur, IdentityRole>()
-            //    .AddEntityFrameworkStores<TableauxContext>();
-
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-            //    .AddEntityFrameworkStores<TableauxContext>();
-
             services.AddSingleton<NamesService>();
 
             services.AddScoped<IFichierService, FichierService>();
-           // services.AddScoped<IFichierService, BlobService>();
 
             services.AddDirectoryBrowser();
 
@@ -78,13 +70,12 @@ namespace TableauWeb
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/Utilisateurs/Login";
+                options.AccessDeniedPath = "/Utilisateurs/AccessDenied";
                 options.SlidingExpiration = true;
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             UserManager<Utilisateur> userManager, RoleManager<Role> roleManager)
         {
@@ -120,16 +111,7 @@ namespace TableauWeb
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                //endpoints.MapControllers();
-                //endpoints.MapGet("api/finitions", (context) =>
-                //{
-                //    var finitions = app.ApplicationServices.GetService<JsonFinitionsService>().GetListe();
-                //    var json = JsonSerializer.Serialize(finitions);
-                //    return context.Response.WriteAsync(json);
-                //});
             });
-
-        
         }
     }
 }

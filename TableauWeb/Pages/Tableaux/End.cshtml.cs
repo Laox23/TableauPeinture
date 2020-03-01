@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
@@ -81,6 +82,8 @@ namespace TableauWeb.Tableaux
 
                 var utilisateur = await _userManager.GetUserAsync(User);
 
+                var guid = System.Guid.NewGuid();
+
                 Tableau = new Tableau()
                 {
                     Image = image,
@@ -88,7 +91,9 @@ namespace TableauWeb.Tableaux
                     Finition = await _context.Finitions.FirstOrDefaultAsync(m => m.FinitionId == FinitionId),
                     NombreImpression = nombresImpression,
                     NomPdf = image.Nom.Trim().Replace(" ", "_") + "_" + nombresImpression.ToString("D4") + ".pdf",
-                    Utilisateur = utilisateur
+                    Utilisateur = utilisateur,
+                    CodeVerif = guid.ToString().GetHashCode().ToString("x"),
+                    DateCreation = DateTime.Now.Date
                 };
 
                 _context.Tableaux.Add(Tableau);

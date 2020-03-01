@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TableauWeb.Model;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Model;
 using TableauWeb.Services;
 
 namespace TableauWeb.Images
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly IFichierService _fichierService;

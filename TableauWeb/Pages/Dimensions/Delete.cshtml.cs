@@ -1,16 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Model;
 using System.Threading.Tasks;
+using TableauWeb.Data;
+using TableauWeb.Model;
 
 namespace TableauWeb.Dimensions
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
-        private readonly TableauWeb.Data.TableauxContext _context;
+        private readonly TableauxContext _context;
 
-        public DeleteModel(TableauWeb.Data.TableauxContext context)
+        public DeleteModel(TableauxContext context)
         {
             _context = context;
         }

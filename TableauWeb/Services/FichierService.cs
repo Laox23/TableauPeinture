@@ -93,7 +93,8 @@ namespace TableauWeb.Services
 
             gfx.DrawString(image.Nom, font, XBrushes.Black, new XRect(0, 20, page.Width, page.Height), XStringFormats.Center);
             gfx.DrawString(tableau.TexteImpressionAffichage, font, XBrushes.Black, new XRect(0, 40, page.Width, page.Height), XStringFormats.Center);
-            gfx.DrawString(DateTime.Now.ToShortDateString(), font, XBrushes.Black, new XRect(0, 100, page.Width, page.Height), XStringFormats.Center);
+            gfx.DrawString(tableau.DateCreation.ToShortDateString(), font, XBrushes.Black, new XRect(0, 100, page.Width, page.Height), XStringFormats.Center);
+            gfx.DrawString(tableau.CodeVerif, font, XBrushes.Black, new XRect(0, 160, page.Width, page.Height), XStringFormats.Center);
 
             using (var imagePdf = XImage.FromFile(Path.Combine(_environment.WebRootPath, _namesService.DossierImagesTableaux, image.NomBase)))
             {

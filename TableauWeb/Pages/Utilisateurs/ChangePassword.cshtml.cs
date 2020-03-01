@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using TableauWeb.Model;
-namespace TableauWeb.Areas.Identity.Pages.Account.Manage
+
+namespace TableauWeb.Utilisateurs
 {
     [Authorize]
     public class ChangePasswordModel : PageModel
@@ -22,7 +23,7 @@ namespace TableauWeb.Areas.Identity.Pages.Account.Manage
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModelChangePassword Input { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -65,7 +66,7 @@ namespace TableauWeb.Areas.Identity.Pages.Account.Manage
         }
     }
 
-    public class InputModel
+    public class InputModelChangePassword
     {
         [Required]
         [DataType(DataType.Password)]

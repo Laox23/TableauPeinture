@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Model;
 
 namespace TableauWeb.Finitions
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TableauxContext _context;

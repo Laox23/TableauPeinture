@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using TableauWeb.Model;
 
-namespace TableauWeb.Areas.Identity.Pages.Account
+namespace TableauWeb.Utilisateurs
 {
     [AllowAnonymous]
     [IgnoreAntiforgeryToken]

@@ -1,19 +1,20 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Model;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 using TableauWeb.Data;
-using TableauWeb.Dto;
+using TableauWeb.Model;
 using TableauWeb.Services;
-using Microsoft.AspNetCore.Identity;
 
 namespace TableauWeb.Pdf
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IFichierService _fichierService;

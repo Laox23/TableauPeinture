@@ -12,15 +12,15 @@
             <i class="fa fa-user"></i> Bonjour @UserManager.GetUserName(User)
         </a>
         <div class="dropdown-menu">
-            <a class="nav-item nav-link" id="manage" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Changer de mot de passe</a>
-            <a class="nav-item nav-link" id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" title="Manage">Déconnexion</a>
+            <a class="nav-item nav-link" id="manage" asp-area="Identity" asp-page="/Utilisateurs/ChangePassword" title="Manage">Changer de mot de passe</a>
+            <a class="nav-item nav-link" id="logoutForm" asp-area="Identity" asp-page="/Utilisateurs/Logout" title="Manage">Déconnexion</a>
         </div>
     </div>
 }
 else
 {
-    <a class="nav-item nav-link float-right" id="login" asp-area="Identity" asp-page="/Account/Login">
+    @*<a class="nav-item nav-link float-right" id="login" asp-area="Identity" asp-page="/Utilisateurs/Login">
         <i class="fa fa-user"></i> Connexion
-    </a>
+    </a>*@
 }
 

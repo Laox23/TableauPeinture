@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TableauWeb.Model;
 using System.Threading.Tasks;
+using TableauWeb.Data;
+using TableauWeb.Model;
 
 namespace TableauWeb.Finitions
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
-        private readonly TableauWeb.Data.TableauxContext _context;
+        private readonly TableauxContext _context;
 
-        public CreateModel(TableauWeb.Data.TableauxContext context)
+        public CreateModel(TableauxContext context)
         {
             _context = context;
         }

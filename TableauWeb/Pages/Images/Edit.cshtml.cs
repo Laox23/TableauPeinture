@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,6 +10,7 @@ using TableauWeb.Services;
 
 namespace TableauWeb.Images
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly IFichierService _fichierService;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -8,19 +9,16 @@ using TableauWeb.Services;
 
 namespace TableauWeb.Images
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
         private readonly IFichierService _fichierService;
         private readonly TableauxContext _context;
 
-        private NamesService _namesService { get; set; }
-
         public DeleteModel(TableauxContext context,
-            NamesService namesService,
             IFichierService fichierService)
         {
             _context = context;
-            _namesService = namesService;
             _fichierService = fichierService;
         }
 

@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
 using TableauWeb.Dto;
 using TableauWeb.Services;
-using System.Linq;
 
 namespace TableauWeb.Images
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TableauxContext _context;

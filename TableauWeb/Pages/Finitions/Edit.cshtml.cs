@@ -5,9 +5,11 @@ using TableauWeb.Model;
 using System.Linq;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TableauWeb.Finitions
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly TableauxContext _context;
@@ -36,8 +38,6 @@ namespace TableauWeb.Finitions
             return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
