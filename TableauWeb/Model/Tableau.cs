@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TableauWeb.Model
 {
@@ -16,8 +17,8 @@ namespace TableauWeb.Model
         [Required]
         public int FinitionId { get; set; }
 
-        //[Required]
-        //public Utilisateur UtilisateurId { get; set; }
+        [Required]
+        public int UtilisateurId { get; set; }
 
 
         [Required(ErrorMessage = "La valeur est obligatoire")]
@@ -27,11 +28,16 @@ namespace TableauWeb.Model
         [Required(ErrorMessage = "La valeur est obligatoire")]
         public string NomPdf { get; set; }
 
+        public string CodeVerif { get; set; }
+
+        public DateTime DateCreation { get; set; }
+
 
         public ImageTableau Image { get; set; }
         public Dimension Dimension { get; set; }
         public Finition Finition { get; set; }
         public Utilisateur Utilisateur { get; set; }
+
 
         public string TexteImpressionAffichage
         {
