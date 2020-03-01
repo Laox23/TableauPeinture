@@ -30,9 +30,6 @@ namespace TableauWeb.Data
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
             });
-
-            //modelBuilder.ApplyConfiguration(new UtilisateurConfiguration());
-            //modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
 
         public DbSet<Finition> Finitions { get; set; }
