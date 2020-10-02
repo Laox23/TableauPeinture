@@ -8,3 +8,4 @@ SqlAzure
 		DefautConnection
 		
 https://tableauweb20200209125511.azurewebsites.net
+https://nicolasfonollosa.fr/

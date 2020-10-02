@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using TableauWeb.Model;
 using PdfSharpCore.Drawing;
-using PdfSharpCore.Fonts;
 using PdfSharpCore.Pdf;
-using PdfSharpCore.Utils;
 using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TableauWeb.Data;
+using TableauWeb.Model;
 
 namespace TableauWeb.Services
 {
     public interface IFichierService
     {
+        Task<string> CreateFile(FileInfo fileInfo);
         Task<string> CreateFile(IFormFile formFile);
         Task<string> GetUrlImage(int id);
         Task<string> EcrisOuRetourneLePdfTableau(Tableau tableau);
@@ -56,6 +55,20 @@ namespace TableauWeb.Services
                     fs.Flush();
                 }
             }
+
+            return newFileName;
+        }
+
+        public async Task<string> CreateFile(FileInfo fileInfo)
+        {
+            var fileName = fileInfo.FullName.Trim('"');
+            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+            var FileExtension = Path.GetExtension(fileName);
+            var newFileName = myUniqueFileName + FileExtension;
+
+            fileName = Path.Combine(_environment.WebRootPath, _namesService.DossierImagesTableaux, newFileName);
+
+            fileInfo.CopyTo(fileName);
 
             return newFileName;
         }

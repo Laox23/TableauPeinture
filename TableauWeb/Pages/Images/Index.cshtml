@@ -1,14 +1,17 @@
 ﻿@page
 @model TableauWeb.Images.IndexModel
 
-<div class="container-fluid">
-    <a asp-page="/Tableaux/Index">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
-    </a>
-    <a asp-page="Create" class="float-right">
-        <i class="fa fa-plus" aria-hidden="true"></i> Nouveau
-    </a>
-</div>
+    <div class="container-fluid">
+        <a asp-page="/Tableaux/Index">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+        </a>
+        <a asp-page="Create" class="float-right">
+            <i class="fa fa-plus" aria-hidden="true"></i> Nouveau
+        </a>
+        <a asp-page="CreateMasse" class="float-right">
+            <i class="fa fa-plus" aria-hidden="true"></i> Nouveau masse
+        </a>
+    </div>
 
 <div class="container-fluid">
     <div class="jumbotron">
